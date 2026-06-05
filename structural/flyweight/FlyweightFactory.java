@@ -2,22 +2,21 @@ package structural.flyweight;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class FlyweightFactory {
-    private final int id; 
-    private final Map<String, Flyweight> flyweights;
+    private final Map<Integer, Flyweight> flyweights;
 
     public FlyweightFactory() {
-        this.id = new Random().nextInt(1000);
         this.flyweights = new HashMap<>();
     }
 
-    public Flyweight getFlyweight(String key) {
-        return flyweights.get(key);
-    }
-
-    public void addFlyweight(String key, Flyweight flyweight) {
-        flyweights.put(key, flyweight);
+    public Flyweight getFlyweight(int key) {
+        if (flyweights.containsKey(key)) {
+            return flyweights.get(key);
+        } else {
+            Flyweight flyweight = new ConcreteFlyweight(key);
+            flyweights.put(key, flyweight);
+            return flyweight;
+        }
     }
 }

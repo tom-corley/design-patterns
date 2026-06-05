@@ -1,5 +1,5 @@
 package structural.flyweight;
 
 public interface Flyweight {
-    void operation();
+    void operation(int extrinsicState);
 }
